@@ -1,0 +1,28 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 18
+    commands:
+      - echo Installing backend dependencies...
+      - cd backend && npm install
+      - cd ../frontend && npm install
+  pre_build:
+    commands:
+      - echo Running unit check steps...
+  build:
+    commands:
+      - echo Building frontend Vite production build...
+      - npm run build
+  post_build:
+    commands:
+      - echo Packaging build artifacts...
+      - cd ..
+
+artifacts:
+  files:
+    - 'backend/**/*'
+    - 'frontend/dist/**/*'
+    - 'scripts/**/*'
+    - 'cicd/appspec.yml'
