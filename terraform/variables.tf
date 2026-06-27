@@ -24,6 +24,6 @@ variable "key_name" {
 
 variable "s3_bucket_name" {
   type        = string
-  default     = "cloudpath-resume-vault-992211"
+  default     = "skillbridge-resume-vault-992211"
   description = "S3 bucket for resume storage"
 }

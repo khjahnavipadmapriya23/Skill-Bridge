@@ -8,7 +8,7 @@ resource "aws_vpc" "main_vpc" {
   enable_dns_hostnames = true
   enable_dns_support   = true
   tags = {
-    Name = "cloudpath-vpc"
+    Name = "skillbridge-vpc"
   }
 }
 
@@ -18,14 +18,14 @@ resource "aws_subnet" "public_subnet" {
   map_public_ip_on_launch = true
   availability_zone       = "${var.aws_region}a"
   tags = {
-    Name = "cloudpath-public-subnet"
+    Name = "skillbridge-public-subnet"
   }
 }
 
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.main_vpc.id
   tags = {
-    Name = "cloudpath-igw"
+    Name = "skillbridge-igw"
   }
 }
 
@@ -38,7 +38,7 @@ resource "aws_route_table" "public_rt" {
   }
 
   tags = {
-    Name = "cloudpath-public-route-table"
+    Name = "skillbridge-public-route-table"
   }
 }
 
@@ -49,7 +49,7 @@ resource "aws_route_table_association" "public_rt_assoc" {
 
 # 2. Security Group (Web & SSH access)
 resource "aws_security_group" "web_sg" {
-  name        = "cloudpath-web-security-group"
+  name        = "skillbridge-web-security-group"
   description = "Enable inbound HTTP, SSH, and Node API traffic"
   vpc_id      = aws_vpc.main_vpc.id
 
@@ -86,7 +86,7 @@ resource "aws_security_group" "web_sg" {
   }
 
   tags = {
-    Name = "cloudpath-security-group"
+    Name = "skillbridge-security-group"
   }
 }
 
@@ -95,14 +95,14 @@ resource "aws_s3_bucket" "resume_bucket" {
   bucket        = var.s3_bucket_name
   force_destroy = true
   tags = {
-    Name        = "cloudpath-resume-bucket"
+    Name        = "skillbridge-resume-bucket"
     Environment = "Production"
   }
 }
 
 # 4. IAM Role for S3 access from EC2
 resource "aws_iam_role" "ec2_s3_role" {
-  name = "cloudpath-ec2-s3-access-role"
+  name = "skillbridge-ec2-s3-access-role"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -120,7 +120,7 @@ resource "aws_iam_role" "ec2_s3_role" {
 
 # IAM Policy for S3 read/write actions
 resource "aws_iam_role_policy" "s3_access_policy" {
-  name = "cloudpath-s3-policy"
+  name = "skillbridge-s3-policy"
   role = aws_iam_role.ec2_s3_role.id
 
   policy = jsonencode({
@@ -144,7 +144,7 @@ resource "aws_iam_role_policy" "s3_access_policy" {
 }
 
 resource "aws_iam_instance_profile" "ec2_profile" {
-  name = "cloudpath-ec2-profile"
+  name = "skillbridge-ec2-profile"
   role = aws_iam_role.ec2_s3_role.name
 }
 
@@ -174,13 +174,13 @@ resource "aws_instance" "app_server" {
               sudo npm install -g pm2
               
               # Create app path
-              sudo mkdir -p /var/www/cloudpath
-              sudo chown -R ec2-user:ec2-user /var/www/cloudpath
+              sudo mkdir -p /var/www/skillbridge
+              sudo chown -R ec2-user:ec2-user /var/www/skillbridge
               
               echo "Server Setup Completed" > /var/log/user_data_complete.log
               EOF
 
   tags = {
-    Name = "cloudpath-app-server"
+    Name = "skillbridge-app-server"
   }
 }

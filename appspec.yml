@@ -2,11 +2,11 @@ version: 0.0
 os: linux
 files:
   - source: /backend
-    destination: /var/www/cloudpath/backend
+    destination: /var/www/skillbridge/backend
   - source: /frontend/dist
-    destination: /var/www/cloudpath/frontend/dist
+    destination: /var/www/skillbridge/frontend/dist
   - source: /scripts
-    destination: /var/www/cloudpath/scripts
+    destination: /var/www/skillbridge/scripts
 hooks:
   ApplicationStop:
     - location: scripts/stop_server.sh
