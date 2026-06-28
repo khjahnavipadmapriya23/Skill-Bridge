@@ -6,11 +6,13 @@ import './index.css';
 // Dynamic API interceptor for local vs production routing
 const originalFetch = window.fetch;
 window.fetch = function (url, options) {
+  console.log("Global fetch intercepted. Original URL:", url);
   if (typeof url === 'string' && url.startsWith('http://localhost:5000/api')) {
     const apiBase = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
       ? 'http://localhost:5000/api'
       : '/api';
     url = url.replace('http://localhost:5000/api', apiBase);
+    console.log("Global fetch rewritten to:", url);
   }
   return originalFetch(url, options);
 };
