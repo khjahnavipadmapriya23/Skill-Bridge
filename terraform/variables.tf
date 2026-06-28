@@ -18,12 +18,12 @@ variable "ami_id" {
 
 variable "key_name" {
   type        = string
-  default     = "deploy-key"
+  default     = "vockey"
   description = "Key pair name for EC2 SSH access"
 }
 
 variable "s3_bucket_name" {
   type        = string
-  default     = "skillbridge-resume-vault-992211"
+  default     = "skillbridge-resume-vault-khj-9922"
   description = "S3 bucket for resume storage"
 }

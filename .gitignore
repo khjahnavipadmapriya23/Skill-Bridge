@@ -1,0 +1,20 @@
+# Dependencies
+node_modules/
+
+# Production builds
+dist/
+build/
+
+# Local Environment Secrets
+.env
+.env.local
+
+# Terraform configuration cache and state files
+.terraform/
+*.tfstate
+*.tfstate.*
+.terraform.tfstate.lock.info
+
+# System Files
+.DS_Store
+Thumbs.db
