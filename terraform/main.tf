@@ -100,53 +100,53 @@ resource "aws_s3_bucket" "resume_bucket" {
   }
 }
 
-# 4. IAM Role for S3 access from EC2
-resource "aws_iam_role" "ec2_s3_role" {
-  name = "skillbridge-ec2-s3-access-role"
-
-  assume_role_policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Action    = "sts:AssumeRole"
-        Effect    = "Allow"
-        Principal = {
-          Service = "ec2.amazonaws.com"
-        }
-      }
-    ]
-  })
-}
-
-# IAM Policy for S3 read/write actions
-resource "aws_iam_role_policy" "s3_access_policy" {
-  name = "skillbridge-s3-policy"
-  role = aws_iam_role.ec2_s3_role.id
-
-  policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Effect   = "Allow"
-        Action   = [
-          "s3:GetObject",
-          "s3:PutObject",
-          "s3:ListBucket",
-          "s3:DeleteObject"
-        ]
-        Resource = [
-          aws_s3_bucket.resume_bucket.arn,
-          "${aws_s3_bucket.resume_bucket.arn}/*"
-        ]
-      }
-    ]
-  })
-}
-
-resource "aws_iam_instance_profile" "ec2_profile" {
-  name = "skillbridge-ec2-profile"
-  role = aws_iam_role.ec2_s3_role.name
-}
+# 4. IAM Role for S3 access from EC2 (Commented out for AWS Academy lab compatibility)
+# resource "aws_iam_role" "ec2_s3_role" {
+#   name = "skillbridge-ec2-s3-access-role"
+# 
+#   assume_role_policy = jsonencode({
+#     Version = "2012-10-17"
+#     Statement = [
+#       {
+#         Action    = "sts:AssumeRole"
+#         Effect    = "Allow"
+#         Principal = {
+#           Service = "ec2.amazonaws.com"
+#         }
+#       }
+#     ]
+#   })
+# }
+# 
+# # IAM Policy for S3 read/write actions
+# resource "aws_iam_role_policy" "s3_access_policy" {
+#   name = "skillbridge-s3-policy"
+#   role = aws_iam_role.ec2_s3_role.id
+# 
+#   policy = jsonencode({
+#     Version = "2012-10-17"
+#     Statement = [
+#       {
+#         Effect   = "Allow"
+#         Action   = [
+#           "s3:GetObject",
+#           "s3:PutObject",
+#           "s3:ListBucket",
+#           "s3:DeleteObject"
+#         ]
+#         Resource = [
+#           aws_s3_bucket.resume_bucket.arn,
+#           "${aws_s3_bucket.resume_bucket.arn}/*"
+#         ]
+#       }
+#     ]
+#   })
+# }
+# 
+# resource "aws_iam_instance_profile" "ec2_profile" {
+#   name = "skillbridge-ec2-profile"
+#   role = aws_iam_role.ec2_s3_role.name
+# }
 
 # 5. EC2 Instance
 resource "aws_instance" "app_server" {
@@ -154,7 +154,7 @@ resource "aws_instance" "app_server" {
   instance_type        = var.instance_type
   subnet_id            = aws_subnet.public_subnet.id
   vpc_security_group_ids = [aws_security_group.web_sg.id]
-  iam_instance_profile = aws_iam_instance_profile.ec2_profile.id
+  iam_instance_profile = "LabInstanceProfile"
   key_name             = var.key_name
 
   user_data = <<-EOF
