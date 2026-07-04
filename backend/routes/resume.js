@@ -2,8 +2,11 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 const pdfParse = require('pdf-parse');
+const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
 const { dbGet, dbRun, dbAll } = require('../database');
 const { authenticateToken, logUserActivity } = require('./auth');
+
+const s3 = new S3Client({ region: 'us-east-1' });
 
 // Multer memory storage configuration for clean file-upload handling
 const upload = multer({
@@ -88,6 +91,22 @@ router.post('/upload', authenticateToken, upload.single('resume'), async (req, r
   }
 
   try {
+    // Upload original file to AWS S3 bucket using EC2 IAM Role permissions
+    const bucketName = process.env.S3_BUCKET_NAME || 'skillbridge-resume-vault-khj-9922';
+    const s3Key = `resumes/${req.user.id}-${Date.now()}-${req.file.originalname}`;
+    
+    try {
+      await s3.send(new PutObjectCommand({
+        Bucket: bucketName,
+        Key: s3Key,
+        Body: req.file.buffer,
+        ContentType: req.file.mimetype
+      }));
+      console.log(`Successfully uploaded resume to S3: ${s3Key}`);
+    } catch (s3Error) {
+      console.error('S3 Upload failed:', s3Error);
+      // Fallback: we don't crash parsing if AWS credentials are not configured locally
+    }
     let parsedText = '';
     if (req.file.mimetype === 'application/pdf') {
       const pdfData = await pdfParse(req.file.buffer);
