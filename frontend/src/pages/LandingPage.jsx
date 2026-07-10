@@ -35,21 +35,6 @@ export default function LandingPage() {
         position: 'relative'
       }}>
         <div style={{ maxWidth: '900px', margin: '0 auto' }}>
-          <div style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '8px',
-            backgroundColor: 'rgba(255, 153, 0, 0.1)',
-            border: '1px solid rgba(255, 153, 0, 0.2)',
-            padding: '6px 16px',
-            borderRadius: '99px',
-            fontSize: '0.85rem',
-            fontWeight: '600',
-            color: '#ff9900',
-            marginBottom: '24px'
-          }}>
-            <Server size={14} /> AWS Cloud Deployable Infrastructure Enabled
-          </div>
           <h1 style={{ fontSize: '3.8rem', fontWeight: '800', lineHeight: 1.1, marginBottom: '24px' }}>
             Bridge Your <span style={{ color: '#ff9900' }}>Skill Gaps</span>. <br />
             Accelerate Your <span style={{ color: '#0ea5e9' }}>Placement Readiness</span>.
