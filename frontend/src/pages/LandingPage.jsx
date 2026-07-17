@@ -64,8 +64,8 @@ export default function LandingPage() {
           <p style={{ color: '#94a3b8', fontSize: '0.9rem', fontWeight: '500' }}>Automated Skill Mapping</p>
         </div>
         <div style={{ textAlign: 'center' }}>
-          <h3 style={{ fontSize: '2.5rem', fontWeight: '800', color: '#10b981' }}>AWS</h3>
-          <p style={{ color: '#94a3b8', fontSize: '0.9rem', fontWeight: '500' }}>CI/CD Ready Environment</p>
+          <h3 style={{ fontSize: '2.5rem', fontWeight: '800', color: '#10b981' }}>Real-Time</h3>
+          <p style={{ color: '#94a3b8', fontSize: '0.9rem', fontWeight: '500' }}>Progress Analytics</p>
         </div>
       </section>
 
@@ -160,7 +160,7 @@ export default function LandingPage() {
       }}>
         <div>&copy; {new Date().getFullYear()} SkillBridge. All rights reserved.</div>
         <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-          <span>Powered by AWS Infrastructure & Terraform</span>
+          <span>Empowering Student Careers</span>
         </div>
       </footer>
     </div>
