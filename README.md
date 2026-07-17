@@ -20,13 +20,9 @@ The application is architected to run locally or be deployed automatically on AW
 
 ## 📐 System Architecture
 
-SkillBridge is split into a decoupled frontend client and a RESTful backend server, designed for seamless hosting on cloud infrastructure:
+SkillBridge is split into a decoupled frontend client and a RESTful backend server, designed for seamless hosting on cloud infrastructure.
 
-```text
-[ Vite + React Client ] --(HTTP REST + JWT Auth)--> [ Express API Server ]
-                                                           |
-                                                   [ SQLite Database ]
-```
+![System Architecture](docs/architecture.jpg)
 
 ### Database Schema (SQLite)
 The relational schema comprises the following tables:
@@ -123,8 +119,19 @@ The backend uses `multer` memory storage to capture file uploads and `pdf-parse`
     ```
 
 ### 2. Automated CI/CD Pipelines
-*   `cicd/buildspec.yml`: Instructs AWS CodeBuild to compile Vite assets and bundle backend deployment folders.
-*   `appspec.yml`: Configures deployment file routing and lifecycle hooks for CodeDeploy.
+
+To achieve modern DevOps integration, the project is configured with a fully automated CI/CD pipeline using AWS developer tools:
+
+![CodePipeline Workflow](docs/codepipeline.jpg)
+
+*   `cicd/buildspec.yml`: Instructs **AWS CodeBuild** to compile Vite assets and bundle backend deployment folders.
+    
+    ![CodeBuild Compilation](docs/codebuild.jpg)
+    
+*   `appspec.yml`: Configures deployment file routing and lifecycle hooks for **AWS CodeDeploy**.
+    
+    ![CodeDeploy Execution](docs/codedeploy.jpg)
+    
 *   `/scripts` Hooks:
     *   `install_dependencies.sh`: Configures PM2, Node runtime, Nginx reverse-proxy, and installs npm packages on the host.
     *   `stop_server.sh`: Halts active PM2 node app runners during new builds.
