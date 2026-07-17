@@ -40,7 +40,7 @@ export default function LandingPage() {
             Accelerate Your <span style={{ color: '#0ea5e9' }}>Placement Readiness</span>.
           </h1>
           <p style={{ fontSize: '1.2rem', color: '#94a3b8', marginBottom: '40px', lineHeight: 1.6 }}>
-            Identify target career skills, track daily DSA milestones, analyze resume keywords automatically, and measure placement readiness scores instantly. Built for scale with Terraform, AWS CodePipeline, and EC2.
+            Identify target career skills, track daily DSA milestones, analyze resume keywords automatically, and measure placement readiness scores instantly. Ready to support you at every stage of your college placement journey.
           </p>
           <div style={{ display: 'flex', gap: '20px', justifyContent: 'center' }}>
             <Link to="/register" className="btn btn-primary" style={{ padding: '14px 28px', fontSize: '1.05rem' }}>
@@ -108,22 +108,6 @@ export default function LandingPage() {
             <h3 style={{ fontSize: '1.25rem', fontWeight: '600', marginBottom: '12px' }}>Leaderboard Streaks</h3>
             <p style={{ color: '#94a3b8', fontSize: '0.95rem', lineHeight: 1.6 }}>
               Track consecutive daily streaks. Rank in the campus Top 10 by readiness scores and show consistency across peer branches.
-            </p>
-          </div>
-
-          <div className="card">
-            <Shield size={36} style={{ color: '#ef4444', marginBottom: '16px' }} />
-            <h3 style={{ fontSize: '1.25rem', fontWeight: '600', marginBottom: '12px' }}>JWT Secure Auth</h3>
-            <p style={{ color: '#94a3b8', fontSize: '0.95rem', lineHeight: 1.6 }}>
-              Register and sign-in safely using JSON Web Token authentication with isolated admin portals to configure role matrices and track analytics.
-            </p>
-          </div>
-
-          <div className="card">
-            <Server size={36} style={{ color: '#a855f7', marginBottom: '16px' }} />
-            <h3 style={{ fontSize: '1.25rem', fontWeight: '600', marginBottom: '12px' }}>DevOps Architected</h3>
-            <p style={{ color: '#94a3b8', fontSize: '0.95rem', lineHeight: 1.6 }}>
-              Designed to be deployed via Terraform. Scripted pipeline configurations for AWS CodePipeline, CodeBuild, CodeDeploy, S3, and EC2 out of the box.
             </p>
           </div>
         </div>
